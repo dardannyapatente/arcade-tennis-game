@@ -1,0 +1,25 @@
+body {
+    background-color: green;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+  }
+  
+  canvas{
+    background-image: url('/images/tennisfield.jpg');
+    background-size: cover;                      
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+  
+  button {
+    border: 3px;
+    font: inherit;
+    padding: 1em;
+    border: 2px solid white;
+  }
+  
