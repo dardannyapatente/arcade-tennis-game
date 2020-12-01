@@ -1,29 +1,37 @@
 class Game {
-  constructor(x, y) {
+  constructor() {
     this.player = new Player(0, 0);
-    this.launcher = new Launcher(200, 0);
     this.balls = [];
+    this.lastBallTimestamp = 0;
+    this.launcher = new Launcher(canvasWidth / 2, 10);
     this.setKeyBindings();
   }
 
-  setKeyBindings () {
+  setKeyBindings() {
     window.addEventListener('keydown', (event) => {
-      switch(event.code) {
+      switch (event.code) {
         case 'ArrowUp':
-          if (this.player.y >= canvasElement.height - canvasElement.height / 2 + 15) {
-          this.player.y -= 10};
+          if (
+            this.player.y >=
+            canvasElement.height - canvasElement.height / 2 + 15
+          ) {
+            this.player.y -= 50;
+          }
           break;
         case 'ArrowDown':
           if (this.player.y <= canvasElement.height - 60) {
-          this.player.y += 10};
+            this.player.y += 50;
+          }
           break;
         case 'ArrowRight':
-          if (this.player.x <= canvasElement.width - 55) {
-          this.player.x += 10};
+          if (this.player.x <= canvasElement.width - 60) {
+            this.player.x += 50;
+          }
           break;
         case 'ArrowLeft':
           if (this.player.x >= 5) {
-          this.player.x -= 10};
+            this.player.x -= 50;
+          }
           break;
         case 'Space':
           this.launchBall();
@@ -31,46 +39,36 @@ class Game {
       }
     });
   }
-  
-  launchBall () {
-    const x = this.launcher.x + this.launcher.width / 2;
-    const y = this.launcher.y + this.launcher.height;
-    const ball = new Ball(this, x, y);
-    this.balls.push(ball);
+
+  launchBall() {
+    const currentTimeStamp = new Date();
+    if (currentTimeStamp > this.lastBallTimestamp + 2) {
+      this.balls.push(new Ball(canvasElement.width / 2 - 25, 50));
+      this.lastBallTimestamp = currentTimeStamp;
+    }
   }
 
-
-  loop () {
+  loop() {
     this.runLogic();
     this.draw();
     window.requestAnimationFrame(() => {
-    this.loop();
+      this.loop();
     });
   }
 
-// Call runLogic method for every "element" in game that has it
-
-runLogic () {
-
-}
-
-/* Run logic for balls --> to improve
-  runLogic () {
-    if (Math.random() < 0.5) {
-
+  runLogic() {
+    this.launchBall();
+    for (let ball of this.balls) {
+      ball.runLogic();
     }
-    this.launcher.push(new Ball(canvasWidth, Math.random() * canvasHeight));
   }
-*/
 
-
-// Call draw method for every "element" in the game
-  draw () {
-      context.clearRect(0, 0, canvasWidth, canvasHeight);
-      for (let ball of this.balls) {
-        ball.draw();
-      }
-      this.player.draw();
-      this.launcher.draw();
+  draw() {
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.player.draw();
+    this.launcher.draw();
+    for (let ball of this.balls) {
+      ball.draw();
+    }
   }
 }
