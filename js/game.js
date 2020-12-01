@@ -48,11 +48,17 @@ class Game {
   }
 
   checkIntersections() {
-    if (ball.x > this.player.x) {
-      this.balls[0].speedX *= -1;
+    if (this.balls[0].y > this.player.y) {
+      this.balls[0].speedX *= 1;
     }
-    if (ball.y > canvasHeight) {
-      this.ball.splice(0, 1);
+    if (this.balls[0].y > canvasHeight - 50) {
+      this.score += 1;
+      this.balls.splice(0, 1);
+      this.launchBall();
+    }
+    if (this.balls[0].y < 0) {
+      this.balls.splice(0, 1);
+      this.launchBall();
     }
     // If there's an intersection with x < 0 or x > canvasWidth,
     // this.balls[0].speedX *= -1;
@@ -82,7 +88,7 @@ class Game {
     for (let ball of this.balls) {
       ball.runLogic();
     }
- //   this.checkIntersections();
+    this.checkIntersections();
   }
 
   draw() {

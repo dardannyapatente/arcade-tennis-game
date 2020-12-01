@@ -6,8 +6,8 @@ class Ball {
     this.x = canvasElement.width / 2 - 25;
     this.y = 70;
 
-    this.speedX = (Math.random() - 0.5) * 4;
-    this.speedY = 1;
+    this.speedX = (Math.random() - 0.6) * 5;
+    this.speedY = 7;
   }
 
   runLogic() {
@@ -17,6 +17,6 @@ class Ball {
 
   draw() {
     context.fillStyle = 'yellow';
-    context.fillRect(this.x, this.y, 50, 50);
+    context.fillRect(this.x, this.y, 25, 25);
   }
 }
