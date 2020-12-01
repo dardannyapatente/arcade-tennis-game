@@ -14,6 +14,7 @@ canvas {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  border: 10px, solid, white;
 }
 
 button {

@@ -3,8 +3,10 @@ class Game {
     this.player = new Player(0, 0);
     this.balls = [];
     this.lastBallTimestamp = 0;
+    this.score = 0;
     this.launcher = new Launcher(canvasWidth / 2, 10);
     this.setKeyBindings();
+    this.launchBall();
   }
 
   setKeyBindings() {
@@ -34,16 +36,36 @@ class Game {
           }
           break;
         case 'Space':
-          this.launchBall();
+          this.hitBall();
           break;
       }
     });
   }
 
+  hitBall() {
+    this.balls[0].speedX *= -1;
+    this.balls[0].speedY *= -1;
+  }
+
+  checkIntersections() {
+    if (ball.x > this.player.x) {
+      this.balls[0].speedX *= -1;
+    }
+    if (ball.y > canvasHeight) {
+      this.ball.splice(0, 1);
+    }
+    // If there's an intersection with x < 0 or x > canvasWidth,
+    // this.balls[0].speedX *= -1;
+    // Tf theres an intersection with the plazer
+    // this.balls[0].speedY *= -1;
+    // If there's an intersection with z > canvas.height,
+    // decrement score bz one and remove ball from arraz
+  }
+
   launchBall() {
+    this.balls.push(new Ball(canvasElement.width / 2 - 25, 50));
     const currentTimeStamp = new Date();
     if (currentTimeStamp > this.lastBallTimestamp + 2) {
-      this.balls.push(new Ball(canvasElement.width / 2 - 25, 50));
       this.lastBallTimestamp = currentTimeStamp;
     }
   }
@@ -57,10 +79,10 @@ class Game {
   }
 
   runLogic() {
-    this.launchBall();
     for (let ball of this.balls) {
       ball.runLogic();
     }
+ //   this.checkIntersections();
   }
 
   draw() {
