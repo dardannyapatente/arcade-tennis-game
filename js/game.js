@@ -86,10 +86,13 @@ class Game {
   loop() {
     this.runLogic();
     this.draw();
-    if (this.active = true) {
+    if (this.active) {
       window.requestAnimationFrame(() => {
         this.loop();
       });
+    } else {
+      screenPlayElement.style.display = 'none';
+      screenGameOverElement.style.display = 'initial';
     }
   }
 
