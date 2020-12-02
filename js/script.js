@@ -6,7 +6,7 @@ const canvasHeight = canvasElement.height;
 const context = canvasElement.getContext('2d');
 
 var backgroundImage = new Image();
-backgroundImage.src = '../images/tennisfield.jpg';
+backgroundImage.src = 'images/tennisfield.jpg';
 
 const game = new Game();
 
@@ -22,4 +22,12 @@ triggerPlayElement.addEventListener('click', () => {
   screenPlayElement.style.display = 'initial';
 
   game.loop();
+});
+
+triggerPlayAgainElement.addEventListener('click', () => {
+    screenGameOverElement.style.display = 'none';
+    screenPlayElement.style.display = 'initial';
+  
+    game.reset();
+    game.loop();
 });

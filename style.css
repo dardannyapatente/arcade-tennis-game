@@ -18,8 +18,12 @@ canvas {
 }
 
 button {
-  border: 3px;
   font: inherit;
   padding: 1em;
-  border: 2px solid white;
+  border: 3px solid white;
+  align-self: center;
+}
+
+h3 {
+
 }

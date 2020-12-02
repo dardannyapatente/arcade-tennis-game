@@ -1,12 +1,16 @@
 class Game {
   constructor() {
+    this.reset();
+    this.setKeyBindings();
+    this.launchBall();
+  }
+
+  reset() {
     this.player = new Player(canvasElement.width / 2 - 15, 400);
+    this.launcher = new Launcher();
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 100;
-    this.launcher = new Launcher();
-    this.setKeyBindings();
-    this.launchBall();
     this.active = true;
   }
 
