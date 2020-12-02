@@ -46,6 +46,7 @@ class Game {
     if (
       this.balls[0].x >= this.player.x && this.balls[0].y >= this.player.y) {
       this.balls[0].speedY *= -1;
+      this.score += 10;
     }
   }
 
@@ -103,7 +104,8 @@ class Game {
 
   drawScore() {
     context.fillStyle = 'white';
-    context.fillText(this.score, 450, 670);
+    context.font = '55px sans-serif';
+    context.fillText(this.score, 380, 690);
   }
 
   draw() {
