@@ -1,3 +1,6 @@
+const playerImage = new Image();
+playerImage.src = 'images/playerdown_12.png';
+
 class Player {
   constructor(x, y) {
     this.x = x;
@@ -6,17 +9,8 @@ class Player {
     this.height = 30;
   }
 
-    draw () {
-      context.fillStyle = 'navy';
-      context.fillRect (
-      this.x,
-      this.y,
-      this.width,
-      this.height
-        )
-    }
-
-    runLogic () {
-
-    }
+  draw() {
+    context.fillStyle = 'navy';
+    context.drawImage(playerImage, this.x, this.y);
+  }
 }

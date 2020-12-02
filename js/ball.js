@@ -1,5 +1,5 @@
 const ballImage = new Image();
-ballImage.src = '../images/ball/ball.00.png';
+ballImage.src = 'images/ball.00.png';
 
 class Ball {
   constructor(x, y) {
@@ -19,6 +19,6 @@ class Ball {
 
   draw() {
     context.fillStyle = 'yellow';
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.drawImage(ballImage, this.x, this.y, this.width, this.height);
   }
 }

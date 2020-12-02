@@ -5,7 +5,7 @@ class Launcher {
   }
 
     draw () {
-        context.fillStyle = 'green';
+        context.fillStyle = 'rgb(232, 234, 236)';
         context.fillRect (
             this.x,
             this.y,

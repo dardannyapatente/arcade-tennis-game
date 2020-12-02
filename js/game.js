@@ -1,6 +1,6 @@
 class Game {
   constructor() {
-    this.player = new Player(canvasElement.width / 2 - 25, 400);
+    this.player = new Player(canvasElement.width / 2 - 15, 400);
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 100;
