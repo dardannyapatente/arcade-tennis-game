@@ -1,7 +1,9 @@
 class Player {
   constructor(x, y) {
-    this.x = canvasElement.width / 2 - 25;
-    this.y = 550;
+    this.x = x;
+    this.y = y;
+    this.width = 50;
+    this.height = 50;
   }
 
     draw () {
@@ -9,8 +11,8 @@ class Player {
       context.fillRect (
       this.x,
       this.y,
-        50,
-        50
+      this.width,
+      this.height
         )
     }
 

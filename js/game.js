@@ -1,12 +1,12 @@
 class Game {
   constructor() {
-    this.player = new Player(0, 0);
+    this.player = new Player(canvasElement.width / 2 - 25, 550);
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 0;
-    this.launcher = new Launcher(canvasWidth / 2, 10);
+    this.launcher = new Launcher();
     this.setKeyBindings();
-    this.launchBall();
+    this.launchBall();  
   }
 
   setKeyBindings() {
@@ -43,15 +43,17 @@ class Game {
   }
 
   hitBall() {
-    this.balls[0].speedX *= -1;
-    this.balls[0].speedY *= -1;
+    if (
+      this.balls[0].x >= this.player.x && this.balls[0].y >= this.player.y) {
+      this.balls[0].speedY *= -1;
+    }
   }
 
   checkIntersections() {
     if (this.balls[0].y > this.player.y) {
       this.balls[0].speedX *= 1;
     }
-    if (this.balls[0].y > canvasHeight - 50) {
+    if (this.balls[0].y > canvasHeight) {
       this.score += 1;
       this.balls.splice(0, 1);
       this.launchBall();
@@ -60,12 +62,6 @@ class Game {
       this.balls.splice(0, 1);
       this.launchBall();
     }
-    // If there's an intersection with x < 0 or x > canvasWidth,
-    // this.balls[0].speedX *= -1;
-    // Tf theres an intersection with the plazer
-    // this.balls[0].speedY *= -1;
-    // If there's an intersection with z > canvas.height,
-    // decrement score bz one and remove ball from arraz
   }
 
   launchBall() {
