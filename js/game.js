@@ -6,17 +6,15 @@ class Game {
     this.score = 100;
     this.launcher = new Launcher();
     this.setKeyBindings();
-    this.launchBall();  
+    this.launchBall();
+    this.active = true;
   }
 
   setKeyBindings() {
     window.addEventListener('keydown', (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          if (
-            this.player.y >=
-            canvasHeight - canvasHeight / 2 + 30
-          ) {
+          if (this.player.y >= canvasHeight - canvasHeight / 2 + 30) {
             this.player.y -= 30;
           }
           break;
@@ -43,8 +41,7 @@ class Game {
   }
 
   hitBall() {
-    if (
-      this.balls[0].x >= this.player.x && this.balls[0].y >= this.player.y) {
+    if (this.balls[0].x >= this.player.x && this.balls[0].y >= this.player.y) {
       this.balls[0].speedY *= -1;
       this.score += 10;
     }
@@ -66,14 +63,14 @@ class Game {
   }
 
   launchBall() {
-    this.balls.push(new Ball(canvasElement.width / 2 - 25, 80));
+    this.balls.push(new Ball(canvasElement.width / 2 - 10, 70));
     const currentTimeStamp = new Date();
     if (currentTimeStamp > this.lastBallTimestamp + 2) {
       this.lastBallTimestamp = currentTimeStamp;
     }
   }
 
- /* collectGarbage() {
+  /* collectGarbage() {
     for (let ball of this.balls) {
       if (
         ball.x > canvasWidth;
@@ -89,17 +86,22 @@ class Game {
   loop() {
     this.runLogic();
     this.draw();
-    window.requestAnimationFrame(() => {
-      this.loop();
-    });
+    if (this.active = true) {
+      window.requestAnimationFrame(() => {
+        this.loop();
+      });
+    }
   }
 
   runLogic() {
- //   this.collectGarbage();
+    //   this.collectGarbage();
     for (let ball of this.balls) {
       ball.runLogic();
     }
     this.checkMissedBall();
+    if (this.score <= 0) {
+      this.active = false;
+    }
   }
 
   drawScore() {
