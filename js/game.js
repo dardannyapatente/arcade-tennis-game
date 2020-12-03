@@ -9,7 +9,6 @@ class Game {
   reset() {
     this.player = new Player(canvasElement.width / 2 - 15, 400);
     this.launcher = new Launcher();
- //   this.shadow = [];
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 100;
@@ -17,7 +16,6 @@ class Game {
     this.intervalBetweenBalls = 3000;
     this.ballStartingSpeedX = 1;
     this.ballStartingSpeedY = 1;
-    this.launchBall();
   }
 
   setKeyBindings() {
@@ -36,11 +34,13 @@ class Game {
         case 'ArrowRight':
           if (this.player.x <= canvasWidth - 70) {
             this.player.x += 30;
+            this.player.image.src = 'images/playerdown_12.png';
           }
           break;
         case 'ArrowLeft':
           if (this.player.x >= 20) {
             this.player.x -= 30;
+            this.player.image.src = 'images/playerdown_15.png';
           }
           break;
         case 'Space':
@@ -53,15 +53,14 @@ class Game {
   hitBall() {
     for (let ball of this.balls) {
       if (
-      (this.player.x + this.player.width + 30 >= ball.x &&
-      this.player.x <= ball.x + ball.width + 10 &&
-      this.player.y + this.player.height + 15 >= ball.y &&
-      this.player.y <= ball.y + ball.height) ||
-      ball.x + ball.width < 0
+        this.player.x < ball.x + ball.width + 20 &&
+        this.player.x + this.player.width + 20 > ball.x &&
+        this.player.y < ball.y + ball.height + 20 &&
+        this.player.y + this.player.height + 20 > ball.y
       ) {
-      hitBallSound.play();
-      ball.speedY *= -1;
-      this.score += 10;
+        this.score += 10;
+        hitBallSound.play();
+        ball.speedY *= -1;
       }
     }
   }
@@ -70,7 +69,7 @@ class Game {
     if (this.balls[0].y > this.player.y) {
       this.balls[0].speedX *= 1;
     }
-    if (this.balls[0].y > canvasHeight) {
+    if (this.balls[0].y > canvasHeight && this.balls[0].y > this.player.y) {
       this.score -= 10;
       this.balls.splice(0, 1);
       this.launchBall();
@@ -97,14 +96,14 @@ class Game {
     }
   }
 
-  // collectGarbage() {
-  //   for (let ball of this.balls) {
-  //     if (ball.x >= this.canvas.width) {
-  //       const indexOfBall = this.balls.indexOf(ball);
-  //       this.balls.splice(indexOfBall, 1);
-  //     }
-  //   }
-  // }
+  collectGarbage() {
+    for (let ball of this.balls) {
+      if (ball.x >= this.canvasWidth || ball.x >= this.canvasHeight) {
+        const indexOfBall = this.balls.indexOf(ball);
+        this.balls.splice(indexOfBall, 1);
+      }
+    }
+  }
 
   loop() {
     this.runLogic();
@@ -123,7 +122,7 @@ class Game {
     this.intervalBetweenBalls *= 0.9996;
     this.ballStartingSpeed *= 0.0001;
     this.launchBall();
-    //  this.collectGarbage();
+    this.collectGarbage();
     for (let ball of this.balls) {
       ball.runLogic();
     }

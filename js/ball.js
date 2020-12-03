@@ -7,7 +7,7 @@ class Ball {
     this.y = y;
     this.width = 15;
     this.height = 15;
-    this.speedX = (Math.random() - 0.6) * 5;
+    this.speedX = (Math.random() - 0.5) * 3;
     this.speedY = 3;
   }
 
