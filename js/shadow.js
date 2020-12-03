@@ -17,7 +17,6 @@
 //       }
     
 //       draw() {
-//         context.fillStyle = 'yellow';
 //         context.drawImage(shadowImage, this.x, this.y, this.width, this.height);
 //       }
 //     }
