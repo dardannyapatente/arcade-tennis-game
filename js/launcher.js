@@ -12,7 +12,7 @@ class Launcher {
         context.fillStyle = 'gray';
         context.fill();
         context.beginPath();
-        context.arc(this.x, this.y, 10, 0, 2 * Math.PI);
+        context.arc(this.x, this.y, 7, 0, 2 * Math.PI);
         context.closePath();
         context.fillStyle = 'yellow';
         context.fill();

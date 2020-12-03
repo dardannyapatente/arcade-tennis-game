@@ -2,7 +2,6 @@ class Game {
   constructor() {
     this.reset();
     this.setKeyBindings();
-    this.launchBall();
   }
 
   reset() {
@@ -12,13 +11,17 @@ class Game {
     this.lastBallTimestamp = 0;
     this.score = 100;
     this.active = true;
+    this.intervalBetweenBalls = 3000;
+    this.ballStartingSpeedX = 1;
+    this.ballStartingSpeedY = 1;
+    this.launchBall();
   }
 
   setKeyBindings() {
     window.addEventListener('keydown', (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          if (this.player.y >= canvasHeight - canvasHeight / 2 + 30) {
+          if (this.player.y >= canvasHeight - canvasHeight / 2 + 10) {
             this.player.y -= 30;
           }
           break;
@@ -45,9 +48,17 @@ class Game {
   }
 
   hitBall() {
-    if (this.balls[0].x >= this.player.x && this.balls[0].y >= this.player.y) {
-      this.balls[0].speedY *= -1;
+    for (let ball of this.balls) {
+      if (
+      (this.player.x + this.player.width + 30 >= ball.x &&
+      this.player.x <= ball.x + ball.width + 30 &&
+      this.player.y + this.player.height + 15 >= ball.y &&
+      this.player.y <= ball.y + ball.height + 30) ||
+      ball.x + ball.width < 0
+      ) {
+      ball.speedY *= -1;
       this.score += 10;
+      }
     }
   }
 
@@ -67,25 +78,29 @@ class Game {
   }
 
   launchBall() {
-    this.balls.push(new Ball(canvasElement.width / 2 - 10, 70));
-    const currentTimeStamp = new Date();
-    if (currentTimeStamp > this.lastBallTimestamp + 2) {
+    const currentTimeStamp = Date.now();
+    if (currentTimeStamp > this.lastBallTimestamp + this.intervalBetweenBalls) {
+      const ball = new Ball(
+        canvasWidth / 2 - 10,
+        70,
+        this.width,
+        this.height,
+        this.ballStartingSpeedX,
+        this.ballStartingSpeedY
+      );
+      this.balls.push(ball);
       this.lastBallTimestamp = currentTimeStamp;
     }
   }
 
-  /* collectGarbage() {
-    for (let ball of this.balls) {
-      if (
-        ball.x > canvasWidth;
-        ball.y > canvasHeight;
-      ) {
-      const indexOfBall = this.balls.indexOf(ball);
-      this.balls.splice(indexOfBall, 1);
-      }
-    }
-  }
-  */
+  // collectGarbage() {
+  //   for (let ball of this.balls) {
+  //     if (ball.x >= this.canvas.width) {
+  //       const indexOfBall = this.balls.indexOf(ball);
+  //       this.balls.splice(indexOfBall, 1);
+  //     }
+  //   }
+  // }
 
   loop() {
     this.runLogic();
@@ -101,7 +116,10 @@ class Game {
   }
 
   runLogic() {
-    //   this.collectGarbage();
+    this.intervalBetweenBalls *= 0.9996;
+    this.ballStartingSpeed *= 0.0001;
+    this.launchBall();
+    //  this.collectGarbage();
     for (let ball of this.balls) {
       ball.runLogic();
     }
