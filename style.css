@@ -18,12 +18,13 @@ canvas {
 }
 
 button {
-  font: inherit;
+  font: sans-serif;
   padding: 1em;
   border: 3px solid white;
   align-self: center;
 }
 
 h3 {
-
+  display: flex;
+  width: 10px;
 }

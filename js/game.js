@@ -7,6 +7,7 @@ class Game {
   reset() {
     this.player = new Player(canvasElement.width / 2 - 15, 400);
     this.launcher = new Launcher();
+ //   this.shadow = [];
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 100;
@@ -51,9 +52,9 @@ class Game {
     for (let ball of this.balls) {
       if (
       (this.player.x + this.player.width + 30 >= ball.x &&
-      this.player.x <= ball.x + ball.width + 30 &&
+      this.player.x <= ball.x + ball.width + 10 &&
       this.player.y + this.player.height + 15 >= ball.y &&
-      this.player.y <= ball.y + ball.height + 30) ||
+      this.player.y <= ball.y + ball.height) ||
       ball.x + ball.width < 0
       ) {
       ball.speedY *= -1;

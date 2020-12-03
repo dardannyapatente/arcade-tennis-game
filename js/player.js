@@ -1,5 +1,8 @@
-const playerImage = new Image();
-playerImage.src = 'images/playerdown_12.png';
+const playerRightImage = new Image();
+playerRightImage.src = 'images/playerdown_12.png';
+
+// const playerLeftImage = new Image();
+// playerleftImage.src = 'images/playerdown_15.png';
 
 class Player {
   constructor(x, y) {
@@ -10,7 +13,15 @@ class Player {
   }
 
   draw() {
-    context.fillStyle = 'navy';
-    context.drawImage(playerImage, this.x, this.y);
+    context.drawImage(playerRightImage, this.x, this.y);
   }
 }
+//   draw() {
+//     if () {
+//       context.drawImage(playerRightImage, this.x, this.y);
+//     }
+//     if () {
+//       context.drawImage(playerLeftImage, this.x, this.y);
+//     }
+//   }
+// }
