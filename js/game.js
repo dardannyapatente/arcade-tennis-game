@@ -14,8 +14,8 @@ class Game {
     this.score = 100;
     this.active = true;
     this.intervalBetweenBalls = 3000;
-    this.ballStartingSpeedX = 1;
-    this.ballStartingSpeedY = 1;
+    this.ballStartingSpeedX = 2;
+    this.ballStartingSpeedY = 2;
   }
 
   setKeyBindings() {
@@ -50,13 +50,23 @@ class Game {
     });
   }
 
+  // getMousePosition(canvas, event) {
+  //   let rect = canvas.getBoundingClientRect();
+  //   let x = event.clientX - rect.left;
+  //   let y = event.clientY - rect.top;
+
+  //   window.addEventListener('mousedown', (event) => {
+  //     this.hitBall();
+  //   });
+  // }
+
   hitBall() {
     for (let ball of this.balls) {
       if (
-        this.player.x < ball.x + ball.width + 20 &&
-        this.player.x + this.player.width + 20 > ball.x &&
-        this.player.y < ball.y + ball.height + 20 &&
-        this.player.y + this.player.height + 20 > ball.y
+        this.player.x < ball.x + ball.width + 15 &&
+        this.player.x + this.player.width + 15 > ball.x &&
+        this.player.y < ball.y + ball.height + 15 &&
+        this.player.y + this.player.height + 15 > ball.y
       ) {
         this.score += 10;
         hitBallSound.play();
