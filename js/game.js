@@ -1,3 +1,5 @@
+const hitBallSound = new Audio('sounds/hit_ball.mp3');
+
 class Game {
   constructor() {
     this.reset();
@@ -57,6 +59,7 @@ class Game {
       this.player.y <= ball.y + ball.height) ||
       ball.x + ball.width < 0
       ) {
+      hitBallSound.play();
       ball.speedY *= -1;
       this.score += 10;
       }
