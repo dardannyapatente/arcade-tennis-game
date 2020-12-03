@@ -16,11 +16,12 @@ class Player {
     context.drawImage(playerRightImage, this.x, this.y);
   }
 }
+
 //   draw() {
-//     if () {
+//     if (event.code == ArrowRight) {
 //       context.drawImage(playerRightImage, this.x, this.y);
 //     }
-//     if () {
+//     if (event.code == ArrowLeft) {
 //       context.drawImage(playerLeftImage, this.x, this.y);
 //     }
 //   }

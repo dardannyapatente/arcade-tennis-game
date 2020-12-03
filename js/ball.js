@@ -17,7 +17,6 @@ class Ball {
   }
 
   draw() {
-    context.fillStyle = 'yellow';
     context.drawImage(ballImage, this.x, this.y, this.width, this.height);
   }
 }
