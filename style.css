@@ -27,7 +27,7 @@ button {
   font: sans-serif;
   padding: 1em;
   border: 3px solid rgb(233, 224, 224);
-  text-align: center;
+
 }
 
 h1 {
@@ -36,7 +36,8 @@ h1 {
   padding-top: 50px;
   padding-bottom: 5px;
   text-align: center;
-  align-self: center;
+  margin: 0px auto;
+  display: block;
 }
 
 #header {
