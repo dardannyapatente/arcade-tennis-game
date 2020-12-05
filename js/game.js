@@ -3,70 +3,85 @@ const hitBallSound = new Audio('sounds/hit_ball.mp3');
 class Game {
   constructor() {
     this.reset();
-    this.setKeyBindings();
+    this.movePlayer();
   }
 
   reset() {
-    this.player = new Player(canvasElement.width / 2 - 15, 400);
+    this.player = new Player();
     this.launcher = new Launcher();
     this.balls = [];
     this.lastBallTimestamp = 0;
     this.score = 100;
     this.active = true;
-    this.intervalBetweenBalls = 3000;
-    this.ballStartingSpeedX = 2;
-    this.ballStartingSpeedY = 2;
+    this.intervalBetweenBalls = 2000;
+    this.ballStartingSpeedX = 1;
+    this.ballStartingSpeedY = 1;
   }
 
-  setKeyBindings() {
-    window.addEventListener('keydown', (event) => {
-      switch (event.code) {
-        case 'ArrowUp':
-          if (this.player.y >= canvasHeight - canvasHeight / 2 + 10) {
-            this.player.y -= 30;
-          }
-          break;
-        case 'ArrowDown':
-          if (this.player.y <= canvasHeight - 70) {
-            this.player.y += 30;
-          }
-          break;
-        case 'ArrowRight':
-          if (this.player.x <= canvasWidth - 70) {
-            this.player.x += 30;
-            this.player.image.src = 'images/playerdown_12.png';
-          }
-          break;
-        case 'ArrowLeft':
-          if (this.player.x >= 20) {
-            this.player.x -= 30;
-            this.player.image.src = 'images/playerdown_15.png';
-          }
-          break;
-        case 'Space':
-          this.hitBall();
-          break;
-      }
-    });
-  }
-
-  // getMousePosition(canvas, event) {
-  //   let rect = canvas.getBoundingClientRect();
-  //   let x = event.clientX - rect.left;
-  //   let y = event.clientY - rect.top;
-
-  //   window.addEventListener('mousedown', (event) => {
-  //     this.hitBall();
+  // setKeyBindings() {
+  //   window.addEventListener('keydown', (event) => {
+  //     switch (event.code) {
+  //       case 'ArrowUp':
+  //         if (this.player.y >= canvasHeight - canvasHeight / 2 + 10) {
+  //           this.player.y -= 30;
+  //         }
+  //         break;
+  //       case 'ArrowDown':
+  //         if (this.player.y <= canvasHeight - 70) {
+  //           this.player.y += 30;
+  //         }
+  //         break;
+  //       case 'ArrowRight':
+  //         if (this.player.x <= canvasWidth - 70) {
+  //           this.player.x += 30;
+  //           this.player.image.src = 'images/playerdown_12.png';
+  //         }
+  //         break;
+  //       case 'ArrowLeft':
+  //         if (this.player.x >= 20) {
+  //           this.player.x -= 30;
+  //           this.player.image.src = 'images/playerdown_15.png';
+  //         }
+  //         break;
+  //       case 'Space':
+  //         this.hitBall();
+  //         break;
+  //     }
   //   });
   // }
+
+  movePlayer() {
+    window.addEventListener('mousemove', e => {
+      if (isMoving === true && this.player.y <= canvasHeight / 2) {
+        this.player.x = e.offsetX;
+        this.player.y = e.offsetY;
+      }
+    });
+
+    window.addEventListener('mousedown', e => {
+      this.player.x = e.offsetX;
+      this.player.y = e.offsetY;
+      isMoving = false;
+      this.hitBall();
+    });
+
+    // window.addEventListener('mouseup', e => {
+    //   if (isMoving === true) {
+    //     coordinateX = 0;
+    //     coordinateY = 0;
+    //     isMoving = false;
+    //   }
+    // });
+  }
+
 
   hitBall() {
     for (let ball of this.balls) {
       if (
-        this.player.x < ball.x + ball.width + 15 &&
-        this.player.x + this.player.width + 15 > ball.x &&
-        this.player.y < ball.y + ball.height + 15 &&
-        this.player.y + this.player.height + 15 > ball.y
+        this.player.x < ball.x + ball.width + 3 &&
+        this.player.x + this.player.width + 3 > ball.x &&
+        this.player.y < ball.y + ball.height + 3 &&
+        this.player.y + this.player.height + 3 > ball.y
       ) {
         this.score += 10;
         hitBallSound.play();
