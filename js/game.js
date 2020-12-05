@@ -7,7 +7,7 @@ class Game {
   }
 
   reset() {
-    this.player = new Player();
+    this.player = new Player(canvasElement.width / 2 - 15, 400);
     this.launcher = new Launcher();
     this.balls = [];
     this.lastBallTimestamp = 0;
@@ -18,70 +18,25 @@ class Game {
     this.ballStartingSpeedY = 1;
   }
 
-  // setKeyBindings() {
-  //   window.addEventListener('keydown', (event) => {
-  //     switch (event.code) {
-  //       case 'ArrowUp':
-  //         if (this.player.y >= canvasHeight - canvasHeight / 2 + 10) {
-  //           this.player.y -= 30;
-  //         }
-  //         break;
-  //       case 'ArrowDown':
-  //         if (this.player.y <= canvasHeight - 70) {
-  //           this.player.y += 30;
-  //         }
-  //         break;
-  //       case 'ArrowRight':
-  //         if (this.player.x <= canvasWidth - 70) {
-  //           this.player.x += 30;
-  //           this.player.image.src = 'images/playerdown_12.png';
-  //         }
-  //         break;
-  //       case 'ArrowLeft':
-  //         if (this.player.x >= 20) {
-  //           this.player.x -= 30;
-  //           this.player.image.src = 'images/playerdown_15.png';
-  //         }
-  //         break;
-  //       case 'Space':
-  //         this.hitBall();
-  //         break;
-  //     }
-  //   });
-  // }
-
   movePlayer() {
-    window.addEventListener('mousemove', e => {
-      if (isMoving === true && this.player.y <= canvasHeight / 2) {
-        this.player.x = e.offsetX;
+    window.addEventListener('mousemove', (e) => {
+      this.player.x = e.offsetX;
+      if (e.offsetY >= canvasHeight - canvasHeight / 2) {
         this.player.y = e.offsetY;
       }
     });
-
-    window.addEventListener('mousedown', e => {
-      this.player.x = e.offsetX;
-      this.player.y = e.offsetY;
-      isMoving = false;
+    window.addEventListener('mousedown', (e) => {
       this.hitBall();
     });
-
-    // window.addEventListener('mouseup', e => {
-    //   if (isMoving === true) {
-    //     coordinateX = 0;
-    //     coordinateY = 0;
-    //     isMoving = false;
-    //   }
-    // });
   }
-
 
   hitBall() {
     for (let ball of this.balls) {
       if (
-        this.player.x < ball.x + ball.width + 3 &&
-        this.player.x + this.player.width + 3 > ball.x &&
-        this.player.y < ball.y + ball.height + 3 &&
-        this.player.y + this.player.height + 3 > ball.y
+        this.player.x < ball.x + ball.width + 12 &&
+        this.player.x + this.player.width + 12 > ball.x &&
+        this.player.y < ball.y + ball.height + 12 &&
+        this.player.y + this.player.height + 12 > ball.y
       ) {
         this.score += 10;
         hitBallSound.play();

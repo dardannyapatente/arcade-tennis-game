@@ -1,11 +1,11 @@
-let isMoving = false;
+
 let coordinateX = 0;
 let coordinateY = 0;
 
 class Player {
   constructor(x, y) {
-    this.x = canvasElement.width / 2 - 15;
-    this.y = 400;
+    this.x = x;
+    this.y = x;
     this.width = 30;
     this.height = 30;
     this.image = new Image();
