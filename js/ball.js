@@ -8,7 +8,7 @@ class Ball {
     this.width = 15;
     this.height = 15;
     this.speedX = (Math.random() - 0.5) * 3;
-    this.speedY = 2;
+    this.speedY = 2.5;
   }
 
   runLogic() {
