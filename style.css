@@ -1,12 +1,18 @@
+html,
 body {
   background-color: rgb(43, 145, 68);
   margin: 0;
+  padding: 0;
   height: 100vh;
   display: flex;
   background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 150;
+  line-height: 40px;
+  color: whitesmoke;
 }
 
 canvas {
@@ -20,6 +26,25 @@ canvas {
 button {
   font: sans-serif;
   padding: 1em;
-  border: 3px solid white;
+  border: 3px solid rgb(233, 224, 224);
+  text-align: center;
+}
+
+h1 {
+  color: whitesmoke;
+  font-size: 25px;
+  padding-top: 50px;
+  padding-bottom: 5px;
+  text-align: center;
   align-self: center;
+}
+
+#header {
+  padding-bottom: 30px;
+  font-size: 30px;
+}
+
+p {
+  font-size: 18px;
+  padding-top: 50px;
 }
