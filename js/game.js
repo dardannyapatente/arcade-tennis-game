@@ -20,12 +20,11 @@ class Game {
 
   movePlayer() {
     window.addEventListener('mousemove', (e) => {
+      if (e.offsetX <= (canvasWidth - 60) && e.offsetX >= 0) {
       this.player.x = e.offsetX;
-      if (e.offsetY >= canvasHeight - canvasHeight / 2) {
+    }
+      if (e.offsetY >= canvasHeight - canvasHeight / 2 && e.offsetY <= canvasHeight - 80) {
         this.player.y = e.offsetY;
-      }
-      if (e.offsetX >= canvasWidth || e.offsetX <= 0) {
-        this.player.x = e.offsetX;
       }
     });
     window.addEventListener('mousedown', (e) => {
